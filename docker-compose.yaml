@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:5.0
+    container_name: redis
+  boldo:
+    image: boldo
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: boldo
+    depends_on:
+      - redis
+    ports:
+      - '8008:8008'
+    env_file:
+      - ./.env
